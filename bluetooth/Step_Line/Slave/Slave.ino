@@ -4,38 +4,44 @@ SoftwareSerial BTSerial(2, 3);
 int command;
 // Step
 #include <Stepper.h>
-#define STEPS 2048  // 32 steps * gear reduction ratio 64
+#define STEPS 2048 // 32 steps * gear reduction ratio 64
 #define IN1 12
 #define IN2 11
 #define IN3 10
 #define IN4 9
-const int speed = 15;  // [5, 15]
+const int speed = 15; // [5, 15]
 Stepper stepper(STEPS, IN1, IN3, IN2, IN4);
 int degree = 90;
 float steps;
 int step_count_delay = 0;
 int step_max_delay = 50;
-void setup() {
+void setup()
+{
   BTSerial.begin(9600);
   Serial.begin(19200);
   stepper.setSpeed(speed);
 }
 
-void loop() {
-  if (BTSerial.available()) {
+void loop()
+{
+  if (BTSerial.available())
+  {
     String c = BTSerial.readStringUntil('\n');
     Serial.println(c);
-    if (c.toInt() == 0) {
+    if (c.toInt() == 0)
+    {
       degree = 90;
-    } else if (c.toInt() == 1) {
+    }
+    else if (c.toInt() == 1)
+    {
       degree = -180;
     }
   }
 
-  if (step_count_delay == 0) {
+  if (step_count_delay == 0)
+  {
     steps = degree * 1.0 * STEPS / 360;
     stepper.step(steps);
-    
   }
   step_count_delay++;
   if (step_count_delay > step_max_delay)

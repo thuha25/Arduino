@@ -11,15 +11,19 @@ void setup()
   BTSerial.begin(9600);
 }
 
-void loop() 
+void loop()
 {
-  if (BTSerial.available()) {
+  if (BTSerial.available())
+  {
     int code = BTSerial.read();
     Serial.print("Receive: ");
     Serial.println(code);
-    if (code == '0') {
+    if (code == '0')
+    {
       Serial.println("Hello World!");
-    } else if (code == '1') {
+    }
+    else if (code == '1')
+    {
       Serial.println("Goodbye World!");
     }
   }

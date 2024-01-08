@@ -15,7 +15,6 @@
 //     BTSerial.write(Serial.read());
 // }
 
-
 // #include <SoftwareSerial.h>
 // #include <Stepper.h>
 // SoftwareSerial BTSerial(10,11);
@@ -59,28 +58,34 @@
 int servoPin = 9;
 Servo servo;
 
-SoftwareSerial BTSerial(10,11);
+SoftwareSerial BTSerial(10, 11);
 
-void setup(){
+void setup()
+{
   Serial.begin(9600);
   BTSerial.begin(9600);
   servo.attach(servoPin);
 }
 char c;
-void loop(){
-  while(BTSerial.available()){
+void loop()
+{
+  while (BTSerial.available())
+  {
     c = BTSerial.read();
     Serial.println(c);
     delay(5);
   }
   // float dist = c.toFloat();
-  if(c == '1') {
-      servo.write(45);
-      delay(1000);
-      servo.write(0);
-    } else {
-      servo.write(180);
-      delay(1000);
-      servo.write(0);
-    }
+  if (c == '1')
+  {
+    servo.write(45);
+    delay(1000);
+    servo.write(0);
+  }
+  else
+  {
+    servo.write(180);
+    delay(1000);
+    servo.write(0);
+  }
 }

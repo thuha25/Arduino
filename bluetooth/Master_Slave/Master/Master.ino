@@ -9,7 +9,7 @@ void setup()
   BTSerial.begin(9600);
 }
 
-void loop() 
+void loop()
 {
   BTSerial.write("0");
   delay(200);

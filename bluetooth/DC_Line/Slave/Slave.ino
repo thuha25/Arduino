@@ -25,7 +25,8 @@ int dc_count = 0;
 #define SPEED_3_LOWERBOUND 401
 #define SPEED_3_UPPERBOUND 600
 
-void setup() {
+void setup()
+{
   //
   BTSerial.begin(9600);
   Serial.begin(19200);
@@ -39,20 +40,26 @@ void setup() {
   analogWrite(en12_pin, 0);
 }
 
-void loop() {
-  if (BTSerial.available()) {
+void loop()
+{
+  if (BTSerial.available())
+  {
     String c = BTSerial.readStringUntil('\n');
     Serial.println(c);
-    if (c.toInt() == 0) {
+    if (c.toInt() == 0)
+    {
       CW = true;
       faster = true;
-    } else if (c.toInt() == 1) {
+    }
+    else if (c.toInt() == 1)
+    {
       CW = false;
       faster = false;
     }
   }
   // CW <=> CCW
-  if (CW != CW_cache) {
+  if (CW != CW_cache)
+  {
     // brake
     digitalWrite(dir_2a_pin, LOW);
     digitalWrite(dir_1a_pin, LOW);
@@ -62,38 +69,55 @@ void loop() {
   }
   // Nhanh dần <=> Chậm dần
   // reset dc_count
-  if (faster != faster_cache) {
+  if (faster != faster_cache)
+  {
     faster_cache = faster;
     if (faster)
-      dc_count = SPEED_1_LOWERBOUND;  // Nhanh dần
+      dc_count = SPEED_1_LOWERBOUND; // Nhanh dần
     else
-      dc_count = SPEED_3_UPPERBOUND;  // Chậm dần
+      dc_count = SPEED_3_UPPERBOUND; // Chậm dần
   }
   // choose speed to rotate
-  if (dc_count == SPEED_1_LOWERBOUND && faster || dc_count == SPEED_1_UPPERBOUND && !faster) {
+  if (dc_count == SPEED_1_LOWERBOUND && faster || dc_count == SPEED_1_UPPERBOUND && !faster)
+  {
     digitalWrite(dir_1a_pin, LOW);
     digitalWrite(dir_2a_pin, LOW);
     analogWrite(en12_pin, SPEED_1);
-  } else if (dc_count == SPEED_2_LOWERBOUND && faster || dc_count == SPEED_2_UPPERBOUND && !faster) {
-    if (faster) {
-      if (CW) digitalWrite(dir_1a_pin, HIGH);
-      else digitalWrite(dir_2a_pin, HIGH);
+  }
+  else if (dc_count == SPEED_2_LOWERBOUND && faster || dc_count == SPEED_2_UPPERBOUND && !faster)
+  {
+    if (faster)
+    {
+      if (CW)
+        digitalWrite(dir_1a_pin, HIGH);
+      else
+        digitalWrite(dir_2a_pin, HIGH);
     }
     analogWrite(en12_pin, SPEED_2);
-  } else if (dc_count == SPEED_3_LOWERBOUND && faster || dc_count == SPEED_3_UPPERBOUND && !faster) {
-    if (!faster) {
-      if (CW) digitalWrite(dir_1a_pin, HIGH);
-      else digitalWrite(dir_2a_pin, HIGH);
+  }
+  else if (dc_count == SPEED_3_LOWERBOUND && faster || dc_count == SPEED_3_UPPERBOUND && !faster)
+  {
+    if (!faster)
+    {
+      if (CW)
+        digitalWrite(dir_1a_pin, HIGH);
+      else
+        digitalWrite(dir_2a_pin, HIGH);
     }
     analogWrite(en12_pin, SPEED_3);
   }
   // update dc_count
-  if (faster) {
+  if (faster)
+  {
     ++dc_count;
-    if (dc_count > SPEED_3_UPPERBOUND) dc_count = SPEED_1_LOWERBOUND;
-  } else {
+    if (dc_count > SPEED_3_UPPERBOUND)
+      dc_count = SPEED_1_LOWERBOUND;
+  }
+  else
+  {
     --dc_count;
-    if (dc_count < SPEED_1_LOWERBOUND) dc_count = SPEED_3_UPPERBOUND;  //reset speed
+    if (dc_count < SPEED_1_LOWERBOUND)
+      dc_count = SPEED_3_UPPERBOUND; // reset speed
   }
 
   delay(10);

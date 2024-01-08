@@ -13,29 +13,37 @@ Servo servo;
 int degree = 90;
 int servo_count_delay = 0;
 int servo_max_delay = 100;
-void servoSpin() {
-  while (true) {
+void servoSpin()
+{
+  while (true)
+  {
     servo.write(degree);
-    vTaskDelay(500 / portTICK_PERIOD_MS);  // delay 1 second
+    vTaskDelay(500 / portTICK_PERIOD_MS); // delay 1 second
     servo.write(0);
-    vTaskDelay(500 / portTICK_PERIOD_MS);  // delay 1 second
+    vTaskDelay(500 / portTICK_PERIOD_MS); // delay 1 second
   }
 }
-void setup() {
+void setup()
+{
   Serial.begin(19200);
   BTSerial.begin(9600);
   servo.attach(servo_pin);
   xTaskCreate(servoSpin, "servoSpin", 512, NULL, 1, NULL);
 }
 
-void loop() {
-  if (BTSerial.available()) {
+void loop()
+{
+  if (BTSerial.available())
+  {
     //   // Serial.write(BTSerial.read());
     String c = BTSerial.readStringUntil('\n');
     Serial.println(c);
-    if (c.toInt() == 0) {
+    if (c.toInt() == 0)
+    {
       degree = 90;
-    } else if (c.toInt() == 1) {
+    }
+    else if (c.toInt() == 1)
+    {
       degree = 180;
     }
     // delay(5);

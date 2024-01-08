@@ -11,7 +11,7 @@
   AT+UART=9600,0,0
   AT+NAME?
   AT+PSWD?
-  
+
  ***Cài đặt cho SLAVE***
   AT: Lệnh test, nó sẽ trả về OK nếu module đã hoạt động ở Command Mode
   AT+RMAAD: Xóa mọi thiết bị đã ghép nối
@@ -29,10 +29,9 @@
   AT+CMODE=0: Cho phép kết nối với bất kì địa chỉ nào
   AT+BIND=98D3,41,F6571A Ràng buộc Master với Slave
   AT+LINK=98D3,41,F6571A Kết nối Master với Slave
-  
- 
- */
 
+
+ */
 
 // D10 => HC-05 TX
 // D11 => HC-05 RX
@@ -52,10 +51,10 @@ void setup()
   BTSerial.begin(38400);
 }
 
-void loop() 
+void loop()
 {
   if (Serial.available())
     BTSerial.write(Serial.read());
-  if (BTSerial.available()) 
+  if (BTSerial.available())
     Serial.write(BTSerial.read());
 }
