@@ -11,7 +11,8 @@ bool isRightOn = false;
 bool isUpOn = false;
 bool isDownOn = false;
 
-void setup() {
+void setup()
+{
   pinMode(JoyStick_X, INPUT);
   pinMode(JoyStick_Y, INPUT);
   pinMode(button, INPUT_PULLUP);
@@ -22,42 +23,55 @@ void setup() {
   Serial.begin(9600);
 }
 
-void loop() {
+void loop()
+{
   int x, y, z;
   x = analogRead(JoyStick_X);
   y = analogRead(JoyStick_Y);
   z = digitalRead(button);
 
-  if (x > 500) {
+  if (x > 500)
+  {
     digitalWrite(ledRight, HIGH);
     isRightOn = true;
-  } else if (x < 100) {
+  }
+  else if (x < 100)
+  {
     digitalWrite(ledLeft, HIGH);
     isLeftOn = true;
-  } else if (!isButtonPressed) {
+  }
+  else if (!isButtonPressed)
+  {
     digitalWrite(ledLeft, isLeftOn);
     digitalWrite(ledRight, isRightOn);
   }
 
-  if (y > 500) {
+  if (y > 500)
+  {
     digitalWrite(ledDown, HIGH);
     isDownOn = true;
-  } else if (y < 100) {
+  }
+  else if (y < 100)
+  {
     digitalWrite(ledUp, HIGH);
     isUpOn = true;
-  } else if (!isButtonPressed) {
+  }
+  else if (!isButtonPressed)
+  {
     digitalWrite(ledUp, isUpOn);
     digitalWrite(ledDown, isDownOn);
   }
 
-  if (z == LOW && !isButtonPressed) {
+  if (z == LOW && !isButtonPressed)
+  {
     isButtonPressed = true;
     isLeftOn = false;
     isRightOn = false;
     isUpOn = false;
     isDownOn = false;
-
-  } else if (z == HIGH) {
+  }
+  else if (z == HIGH)
+  {
     isButtonPressed = false;
   }
 
