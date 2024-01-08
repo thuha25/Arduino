@@ -19,15 +19,19 @@ void loop()
   digitalWrite(trigPin, HIGH);
   delayMicroseconds(10);
   digitalWrite(trigPin, LOW);
-  duration = pulseIn(echoPin,HIGH);
-  distance = duration * 0.034/2;
-  if(distance >= 10 && distance <= 20) {
-    for(int x = 0; x <= 180; x++) {
+  duration = pulseIn(echoPin, HIGH);
+  distance = duration * 0.034 / 2;
+  if (distance >= 10 && distance <= 20)
+  {
+    for (int x = 0; x <= 180; x++)
+    {
       int val = 1000 * sin(x * 3.14 / 180);
       tone(BellPin, val);
       delay(2);
     }
-  } else {
+  }
+  else
+  {
     noTone(BellPin);
   }
   Serial.print("Distance Measured=");
