@@ -1,5 +1,4 @@
-#include <Stepper.h> // thư viện có sẵn của Arduino
-
+#include <Stepper.h>
 float temperature;
 const int STEPS = 2048; // Số bước trong một vòng
 Stepper myStepper = Stepper(STEPS, 8, 10, 9, 11);
