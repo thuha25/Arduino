@@ -9,10 +9,10 @@
 int servoPin = 9;
 Servo servo;
 
-
 int potpin = 0;
 int val;
-void setup() {
+void setup()
+{
   Serial.begin(9600);
   servo.attach(servoPin);
   // pinMode(line_pin, INPUT);
@@ -20,9 +20,11 @@ void setup() {
   // pinMode(echoPin, INPUT);
 }
 
-void loop() {
+void loop()
+{
   float mx = 0;
-  for(int i = 0; i < 100; i++) {
+  for (int i = 0; i < 100; i++)
+  {
     float val = analogRead(micPin);
     mx = max(val, mx);
     // mn = min(val, mn);
@@ -30,15 +32,18 @@ void loop() {
   }
 
   Serial.println(mx);
-  
-  if(mx>80) {
+
+  if (mx > 80)
+  {
     servo.write(45);
     delay(1000);
     servo.write(0);
-  } else {
+  }
+  else
+  {
     servo.write(100);
     delay(1000);
     servo.write(0);
   }
-  delay(1000); 
+  delay(1000);
 }
