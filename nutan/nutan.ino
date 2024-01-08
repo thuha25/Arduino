@@ -1,4 +1,4 @@
-int led=13, pin=7, value=0;
+int led = 13, pin = 7, value = 0;
 // void setup(){
 //   pinMode(led,OUTPUT);
 //   pinMode(pin,INPUT);
@@ -9,23 +9,28 @@ int led=13, pin=7, value=0;
 //   digitalWrite(led,value);
 // }
 
-
-//nhấn nhả nút
+// nhấn nhả nút
 boolean i = 0;
 void setup()
 {
   pinMode(pin, INPUT);
-  pinMode(led, OUTPUT);  
+  pinMode(led, OUTPUT);
 }
-void loop(){
-  if(digitalRead(pin) == HIGH){
+void loop()
+{
+  if (digitalRead(pin) == HIGH)
+  {
     i = !i;
-    while(digitalRead(pin) == HIGH);
+    while (digitalRead(pin) == HIGH)
+      ;
     delay(200);
   }
-  if(i==1){
-    digitalWrite(led,HIGH);
-  }else{
-    digitalWrite(led,LOW);
+  if (i == 1)
+  {
+    digitalWrite(led, HIGH);
+  }
+  else
+  {
+    digitalWrite(led, LOW);
   }
 }
