@@ -9,14 +9,15 @@ const int echoPin = 9;
 long duration;
 int distance;
 int vrx, vry;
-#include "DHT.h"       
-#define DHTPin 6    
+#include "DHT.h"
+#define DHTPin 6
 #define DHTType DHT22
 DHT HT(DHTPin, DHTType);
 
-void setup() {
-  float humidity = HT.readHumidity(); 
-  float temperaturec = HT.readTemperature( );
+void setup()
+{
+  float humidity = HT.readHumidity();
+  float temperaturec = HT.readTemperature();
   float temperatureF = HT.readTemperature(true);
   Serial.begin(9600);
   IrSender.begin(IR_SEND_PIN);
@@ -32,12 +33,13 @@ uint16_t address = 0x3A13;
 uint8_t command = 0x1;
 int_fast8_t repeats = 0;
 
-void loop() {
+void loop()
+{
   int value = digitalRead(line);
   int gas = analogRead(gas_pin);
   int light = analogRead(light_pin);
-  float humidity = HT.readHumidity(); 
-  float temperaturec = HT.readTemperature( );
+  float humidity = HT.readHumidity();
+  float temperaturec = HT.readTemperature();
   float temperatureF = HT.readTemperature(true);
 
   // Serial.println(value);
