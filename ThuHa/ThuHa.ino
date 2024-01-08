@@ -1,4 +1,54 @@
 // #include "BlenDArd.h"
+// LightSensor lightsensor(A0);
+// DCMotor dc(9, 6);
+// JoyStick joystick(A0,A1,7);
+// void setup() {
+//   Serial.begin(9600);
+// }
+// // int value;
+// int x,y,z;
+// bool isClockwise = false;
+
+// void loop() {
+//   x = joystick.getX();
+//   y = joystick.getY();
+//   z = joystick.isButtonDown();
+//   Serial.print(x);
+//   Serial.print(" ");
+//   Serial.print(x);
+//   Serial.print(" ");
+//   Serial.println(z);
+//   if(x < 100){
+//     isClockwise = false;
+//   }else if(x > 600){
+//     isClockwise = true;
+//   }
+//   if(y < 100) {
+//     dc.setSpeed(100);
+//   }else if(y>600){
+//     dc.setSpeed(200);
+//   }
+//   if(joystick.isButtonDown()) {
+//     dc.setSpeed(0);
+//   }
+//   if(isClockwise)
+//     dc.rotateClockwise();
+//   else
+//     dc.rotateCounterClockwise();
+//   // value = lightsensor.read();
+//   // Serial.println(value);
+//   // if (value > 700) {
+//   //   dc.rotateCounterClockwise();
+//   //   //nguoc chieu kim
+//   // }else{
+//   //   dc.rotateClockwise();
+//   //   // cung chieu kim
+//   // }
+// }
+
+//
+
+// #include "BlenDArd.h"
 // // LineSensor sensor(3);
 // // LightSensor light(0);
 // Led led(13);
@@ -19,7 +69,7 @@
 //   int x = joystick.getX();
 //   int y = joystick.getY();
 //   bool z = joystick.isButtonDown();
- 
+
 //   Serial.print(x);
 //   Serial.print(" ");
 //   Serial.print(y);
@@ -40,17 +90,15 @@
 //   delay(100);
 // }
 
-
-
 // #include "BlenDArd.h"
 // LightSensor sensor(A0);
 // // do:vcc, nau:gnd
-// void setup() { 
+// void setup() {
 //   Serial.begin(9600);
 //   servoAttach(9);
 //   // startSwinging();
 //   setupServo();
-//   setAngle(90);                                                                                                          
+//   setAngle(90);
 // }
 
 // void loop() {
@@ -64,8 +112,7 @@
 //   delay(200);
 // }
 
-
-// #include <Stepper.h> 
+// #include <Stepper.h>
 // #include "BlenDArd.h"
 // LightSensor sensor(A0);
 // const int STEPS = 2048; // Số bước trong một vòng
@@ -89,7 +136,7 @@
 //     if (val > 700)
 //     {
 //         myStepper.setSpeed(14);          // 18 RPM - Rotations per minute
-//         int degreeC = degreeToSteps(45); 
+//         int degreeC = degreeToSteps(45);
 //         myStepper.step(degreeC);         // quay thuan chiều kim đồng hồ
 //         delay(200);
 //     }
