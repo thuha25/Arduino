@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MLDH - ESP</title>
+  </head>
+  <script>
+    const server = "http://192.168.4.1";
+    function led(status) {
+      fetch(server + "/led?status=" + status)
+        .then(async (response) => {
+          console.log("Set LED: " + status);
+          document.getElementById("led-status").innerHTML = status;
+          document.getElementById("error").innerHTML = "";
+          document.getElementById("message").innerHTML = (
+            await response.json()
+          ).message;
+        })
+        .catch((error) => {
+          document.getElementById("error").innerHTML = error;
+        });
+    }
+    function get_dht() {
+      fetch(server + "/dht")
+        .then(async (response) => {
+          data = await response.json();
+          console.log("Temperature: " + data.temperature);
+          console.log("Humidity: " + data.humidity);
+          document.getElementById("temperature").innerHTML = data.temperature;
+          document.getElementById("humidity").innerHTML = data.humidity;
+          document.getElementById("error").innerHTML = "";
+          document.getElementById("message").innerHTML = (
+            await response.json()
+          ).message;
+        })
+        .catch((error) => {
+          document.getElementById("error").innerHTML = error;
+        });
+    }
+    function control_servo(angle) {
+      fetch(server + "/servo?angle=" + angle)
+        .then(async (response) => {
+          console.log("Servo set angle: " + angle);
+          document.getElementById("error").innerHTML = "";
+          document.getElementById("message").innerHTML = (
+            await response.json()
+          ).message;
+        })
+        .catch((error) => {
+          document.getElementById("error").innerHTML = error;
+        });
+    }
+  </script>
+  <body onload="setInterval(get_dht, 1000)">
+    <button onclick="led('on')">Turn on LED</button>
+    <button onclick="led('off')">Turn off LED</button>
+    <div class="led-status">
+      <p>Led status:</p>
+      <p id="led-status">off</p>
+    </div>
+    <button onclick="get_dht()">Fetch DHT</button>
+    <div class="dht-status">
+      <div class="temperature">
+        <p>Temperature:</p>
+        <p id="temperature"></p>
+      </div>
+      <div class="humidity">
+        <p>Humidity:</p>
+        <p id="humidity"></p>
+      </div>
+    </div>
+    <p>Servo's angle:</p>
+    <input id="angle" type="number" placeholder="0" />
+    <button onclick="control_servo(document.getElementById('angle').value)">
+      Set angle
+    </button>
+    <p>Error:</p>
+    <p id="error"></p>
+    <p>Message:</p>
+    <p id="message"></p>
+  </body>
+</html>
